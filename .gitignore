@@ -1,0 +1,9 @@
+*.nc
+log_*
+LMDZ*
+planetoplot/*
+*~
+expnum*
+DEF/used_*
+planet
+planets.py*
