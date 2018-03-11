@@ -1,5 +1,6 @@
 *.nc
 log_*
+*.log
 LMDZ*
 planetoplot/*
 *~
