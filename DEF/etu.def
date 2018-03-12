@@ -4,4 +4,4 @@ nday=5
 ## Diagnostiques dynamiques
 ok_dynzon=y
 ## Periode de stockage des diagnostiques dynamiques (en jours)
-periodav= 2.
+periodav= 5.
