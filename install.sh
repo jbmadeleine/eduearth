@@ -39,7 +39,7 @@ parallel=0
 machine=local
 veget=0
 ####################################################################
-rrtm=1
+rrtm=0
 
 # This could be improved to add parallel capability
 echo "Running install_lmdz.sh"

@@ -140,10 +140,10 @@ gwd_front_ruwmax=3
 ###############################################################
           # activation du nouveau code de rayonnement RRTM
           # 0 : Ancien code et 1 : RRTM (D=0)
-iflag_rrtm=1
+iflag_rrtm=0
 
           # Nombre de bandes pour le SW. Mettre 2 si iflag_rrtm=0
-NSW=6
+NSW=2
 
     # Albedo et inertie des calottes
 alb_vis_sno_lic=0.96

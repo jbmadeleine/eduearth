@@ -792,7 +792,7 @@ fi
 
 # sequential compilation and bench
 if [ "$sequential" = 1 ] ; then
-echo "./$makelmdz $OPT_MAKELMDZ -rrtm true $opt_cosp -d ${grid_resolution} -v $veget_version gcm " >> compile.sh
+echo "./$makelmdz $OPT_MAKELMDZ -rrtm false $opt_cosp -d ${grid_resolution} -v $veget_version gcm " >> compile.sh
 chmod +x ./compile.sh ; ./compile.sh > $lmdzlog 2>&1
 echo install.sh apres_compilation `date`
 
@@ -860,7 +860,7 @@ if [ $parallel != "none" ] ; then
   rm -f compile.sh
   if [ ${hostname:0:5} = ada33 ] ; then echo "module load intel/2013.0" > compile.sh ; fi
   echo resol=${grid_resolution} >> compile.sh
-  echo ./$makelmdz $OPT_MAKELMDZ -rrtm true $opt_cosp $opt_makelmdz_xios -d \$resol -v $veget_version -mem -parallel $parallel gcm >> compile.sh
+  echo ./$makelmdz $OPT_MAKELMDZ -rrtm false $opt_cosp $opt_makelmdz_xios -d \$resol -v $veget_version -mem -parallel $parallel gcm >> compile.sh
   chmod +x ./compile.sh ; ./compile.sh > $lmdzlog 2>&1
 
   echo "Compilation finished"
