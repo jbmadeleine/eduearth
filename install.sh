@@ -44,7 +44,7 @@ rrtm=1
 # This could be improved to add parallel capability
 echo "Running install_lmdz.sh"
 ./install_lmdz.sh -d $grid_resolution -v $version -parallel none \
-  -bench 0 -veget $veget -nofcm > install_lmdz.log 2>&1
+  -bench 0 -veget $veget -nofcm | tee install_lmdz.log | cat
 
 hostname=`hostname`
 if [ ${hostname:0:5} = ada33 ] ; then
