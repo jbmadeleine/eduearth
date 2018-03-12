@@ -1,8 +1,8 @@
 #! /bin/bash
 
 echo "*** record local changes"
-#git add INIT/planet_start
-#git add RUN/etu.def
+git add DEF/etu.def
+git add DEF/etu_init.def
 git commit -m "save local"
 
 echo "*** update eduplanet"
