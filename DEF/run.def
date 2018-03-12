@@ -1,0 +1,36 @@
+# $Id: run.def 1403 2010-07-01 09:02:53Z fairhead $
+#
+## Fichier de configuration general
+## 
+INCLUDEDEF=physiq.def
+INCLUDEDEF=gcm.def
+INCLUDEDEF=L39.def
+INCLUDEDEF=orchidee.def
+INCLUDEDEF=output.def
+INCLUDEDEF=config.def
+## Type de calendrier utilise
+## valeur possible: earth_360d (defaut), earth_365d, earth_366d
+calend=earth_360d
+## Jour de l'etat initial ( = 350  si 20 Decembre ,par expl. ,comme ici )
+dayref=1
+##  Annee de l'etat  initial (   avec  4  chiffres   )
+anneeref=1980
+## Nombre de jours d'integration
+nday=1
+## Remise a zero de la date initiale
+raz_date=0
+## periode de sortie des variables de controle (en pas)
+iconser=30
+## periode d'ecriture du fichier histoire (en jour)
+iecri=1
+## flag de sortie dynzon
+ok_dynzon=n
+## periode de stockage fichier dynzon (en jour)
+periodav= 30.
+## activation du calcul d equilibrage de charge
+adjust=n
+## activation du filtre fft
+use_filtre_fft=n
+## niveau d'impression de controle
+prt_level=0
+ok_sync=y

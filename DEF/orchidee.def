@@ -1,0 +1,894 @@
+#
+#**************************************************************************
+#                    Namelist for ORCHIDEE
+#**************************************************************************
+#
+#
+#**************************************************************************
+#          OPTIONS NOT SET
+#**************************************************************************
+#
+#
+#**************************************************************************
+#          Management of display in the run of ORCHIDEE
+#**************************************************************************
+
+# Model chatting level
+# level of online diagnostics in STOMATE (0-4)
+# With this variable, you can determine how much online information STOMATE
+#  gives during the run. 0 means virtually no info.
+BAVARD = 1
+# default = 1
+
+# Flag for debug information
+# This option allows to switch on the output of debug
+#         information without recompiling the code.
+DEBUG_INFO = n
+#default = n
+
+# ORCHIDEE will print more messages
+# This flag permits to print more debug messages in the run.
+LONGPRINT = n
+#default = n
+
+#---------------------------------------------------------------------
+
+# To reset the time coming from SECHIBA restart file
+# This option allows the model to override the time
+#  found in the restart file of SECHIBA with the time
+#  of the first call. That is the restart time of the GCM.
+SECHIBA_reset_time = y
+# default = n
+
+#**************************************************************************
+#          Files : incoming / forcing / restart /output
+#**************************************************************************
+# Ancillary files :
+#---------------------------------------------------------------------
+
+# Name of file from which the vegetation map is to be read
+# If !IMPOSE_VEG
+# If LAND_USE 
+#   default = pft_new.nc
+#   The name of the file to be opened to read a vegetation
+#   map (in pft) is to be given here. 
+# If !LAND_USE
+#   default = ../surfmap/carteveg5km.nc
+#   The name of the file to be opened to read the vegetation
+#   map is to be given here. Usualy SECHIBA runs with a 5kmx5km
+#   map which is derived from the IGBP one. We assume that we have
+#   a classification in 87 types. This is Olson modified by Viovy.
+VEGETATION_FILE = PFTmap.nc
+
+
+# Name of file from which the bare soil albedo
+# If !IMPOSE_AZE
+# The name of the file to be opened to read the soil types from 
+#  which we derive then the bare soil albedos. This file is 1x1 
+#  deg and based on the soil colors defined by Wilson and Henderson-Seller.
+SOILALB_FILE = soils_param.nc
+# default = ../surfmap/soils_param.nc
+
+# Name of file from which soil types are read
+# If !IMPOSE_VEG
+# The name of the file to be opened to read the soil types. 
+#  The data from this file is then interpolated to the grid of
+#  of the model. The aim is to get fractions for sand loam and
+#  clay in each grid box. This information is used for soil hydrology
+#  and respiration.
+#  This parameter change name in newer ORCHIDEE versions; SOILTYPE_FILE=>SOILCLASS_FILE
+SOILTYPE_FILE = soils_param.nc
+SOILCLASS_FILE= soils_param.nc
+# default = ../surfmap/soils_param.nc
+
+# Name of file from which the reference
+# The name of the file to be opened to read
+#  temperature is read
+#  the reference surface temperature.
+#  The data from this file is then interpolated
+#  to the grid of the model.
+#  The aim is to get a reference temperature either
+#  to initialize the corresponding prognostic model
+#  variable correctly (ok_dgvm = TRUE) or to impose it
+#  as boundary condition (ok_dgvm = FALSE)
+REFTEMP_FILE = reftemp.nc
+# default = reftemp.nc
+
+# Name of file containg information about topography.
+TOPOGRAPHY_FILE =cartepente2d_15min.nc
+
+# Input and output restart file for SECHIBA :
+#---------------------------------------------------------------------
+
+# Name of restart to READ for initial conditions
+# This is the name of the file which will be opened
+#  to extract the initial values of all prognostic
+#  values of the model. This has to be a netCDF file.
+#  Not truly COADS compliant. NONE will mean that
+#  no restart file is to be expected.
+SECHIBA_restart_in= sechiba_rest_in.nc
+# default = NONE
+
+# Name of restart files to be created by SECHIBA
+# This variable give the name for the restart files. 
+#  The restart software within IOIPSL will add .nc if needed.
+SECHIBA_rest_out=sechiba_rest_out.nc
+# default = sechiba_rest_out.nc
+
+# Input and output restart file for STOMATE :
+#---------------------------------------------------------------------
+
+# Name of restart to READ for initial conditions of STOMATE
+# If STOMATE_OK_STOMATE || STOMATE_WATCHOUT
+# This is the name of the file which will be opened of STOMATE
+#   to extract the initial values of all prognostic values of STOMATE.
+STOMATE_RESTART_FILEIN = stomate_rest_in.nc
+# default = NONE
+
+# Name of restart files to be created by STOMATE
+# If STOMATE_OK_STOMATE || STOMATE_WATCHOUT
+# This is the name of the file which will be opened
+#        to write the final values of all prognostic values
+#        of STOMATE.
+STOMATE_RESTART_FILEOUT = stomate_rest_out.nc
+# default = stomate_restart.nc
+
+# Forcing files for TESTSTOMATE and FORCESOIL
+#---------------------------------------------------------------------
+
+# Name of STOMATE's forcing file
+# Name that will be given to STOMATE's offline forcing file
+#STOMATE_FORCING_NAME = stomate_forcing.nc
+#default = NONE
+
+# Size of STOMATE forcing data in memory (MB)
+# This variable determines how many
+#  forcing states will be kept in memory.
+#  Must be a compromise between memory
+#  use and frequeny of disk access.
+STOMATE_FORCING_MEMSIZE = 50
+# default = 50
+
+# Name of STOMATE's carbon forcing file
+# Name that will be given to STOMATE's carbon offline forcing file
+#STOMATE_CFORCING_NAME = stomate_Cforcing.nc
+# default = NONE
+
+
+# Produced forcing file name (SECHIBA puis STOMATE) :
+#---------------------------------------------------------------------
+
+# ORCHIDEE will write out its forcing to a file
+# This flag allows to write to a file all the variables
+#  which are used to force the land-surface. The file 
+#  has exactly the same format than a normal off-line forcing
+#  and thus this forcing can be used for forcing ORCHIDEE.
+#ORCHIDEE_WATCHOUT = y
+# default = n
+
+# Filenane for the ORCHIDEE forcing file
+# If ORCHIDEE_WATCHOUT
+# This is the name of the file in which the
+#  forcing used here will be written for later use. 
+WATCHOUT_FILE = orchidee_watchout.nc
+# default = orchidee_watchout.nc
+
+# ORCHIDEE will write out with this frequency
+# If ORCHIDEE_WATCHOUT
+# This flag indicates the frequency of the write of the variables. 
+DT_WATCHOUT = 1800
+# default = dt
+
+# STOMATE does minimum service
+# set to TRUE if you want STOMATE to read
+#  and write its start files and keep track
+#  of longer-term biometeorological variables.
+#  This is useful if OK_STOMATE is not set,
+#  but if you intend to activate STOMATE later.
+#  In that case, this run can serve as a 
+#  spinup for longer-term biometeorological
+#  variables.
+#STOMATE_WATCHOUT = y
+# default = n
+
+# Output file name (SECHIBA and STOMATE) :
+#---------------------------------------------------------------------
+# Name of file in which the output is going
+# This file is going to be created by the model
+#  to be written
+#  and will contain the output from the model.
+#  This file is a truly COADS compliant netCDF file.
+#  It will be generated by the hist software from
+#  the IOIPSL package.
+OUTPUT_FILE = sechiba_history.nc
+# default = cabauw_out.nc
+
+# Flag to switch on histfile 2 for SECHIBA (hi-frequency ?)
+# This Flag switch on the second SECHIBA writing for hi (or low) 
+#  frequency writing. This second output is optional and not written
+#  by default.
+SECHIBA_HISTFILE2= y
+# default  = FALSE
+
+# Name of file in which the output number 2 is going
+#   to be written
+# If SECHIBA_HISTFILE2
+# This file is going to be created by the model
+#   and will contain the output 2 from the model.
+SECHIBA_OUTPUT_FILE2 = sechiba_out_2.nc
+# default  = sechiba_out_2.nc
+
+# Name of file in which STOMATE's output is going to be written
+# This file is going to be created by the model
+#  and will contain the output from the model.
+#  This file is a truly COADS compliant netCDF file.
+#  It will be generated by the hist software from
+#  the IOIPSL package.
+STOMATE_OUTPUT_FILE = stomate_history.nc
+# default = stomate_history.nc
+
+# Write levels for outputs files (number of variables) :
+#---------------------------------------------------------------------
+
+# SECHIBA history output level (0..10)
+# Chooses the list of variables in the history file. 
+#  Values between 0: nothing is written; 10: everything is 
+#  written are available More details can be found on the web under documentation.
+#  web under documentation.
+SECHIBA_HISTLEVEL= 11
+# default = 5
+
+# SECHIBA history 2 output level (0..10)
+# If SECHIBA_HISTFILE2
+# Chooses the list of variables in the history file. 
+#   Values between 0: nothing is written; 10: everything is 
+#   written are available More details can be found on the web under documentation.
+#   web under documentation.
+# First level contains all ORCHIDEE outputs.
+SECHIBA_HISTLEVEL2= 1
+# default = 1
+
+# STOMATE history output level (0..10)
+#  0: nothing is written; 10: everything is written
+#STOMATE_HISTLEVEL = _AUTO_
+# default = 10
+
+#--------------------------------------------------------------------
+# STOMATE_IPCC_OUTPUT_FILE
+# This file is going to be created by the model
+#    and will contain the output from the model.
+#    This file is a truly COADS compliant netCDF file.
+#    It will be generated by the hist software from
+#    the IOIPSL package.
+# Name of file in which STOMATE's output is going
+# to be written
+STOMATE_IPCC_OUTPUT_FILE = stomate_ipcc_history.nc
+# default = stomate_ipcc_history.nc
+
+# STOMATE_IPCC_HIST_DT
+# Time step of the STOMATE IPCC history file
+# STOMATE IPCC history time step (d)
+STOMATE_IPCC_HIST_DT = -1
+# default = 0.
+
+# Write frequency for output files (SECHIBA in seconds et
+# STOMATE in days) :
+#---------------------------------------------------------------------
+# Frequency in seconds at which to WRITE output
+# This variables gives the frequency the output of
+#  the model should be written into the netCDF file.
+#  It does not affect the frequency at which the
+#  operations such as averaging are done.
+#WRITE_STEP= -1.
+WRITE_STEP= 86400.0
+# default = 86400.0
+
+# Frequency in seconds at which to WRITE output
+# If SECHIBA_HISTFILE2
+# This variables gives the frequency the output 2 of
+#   the model should be written into the netCDF file.
+#   It does not affect the frequency at which the
+#   operations such as averaging are done.
+#   That is IF the coding of the calls to histdef
+#   are correct !
+WRITE_STEP2= 10800.0
+# default = 1800.0
+
+# STOMATE history time step (d)
+# Time step of the STOMATE history file
+# Care : this variable must be higher than DT_SLOW
+#STOMATE_HIST_DT = _AUTO_
+# default = 10.
+
+#---------------------------------------------------------------------
+# FORCESOIL CARBON spin up parametrization
+#---------------------------------------------------------------------
+
+# Number of time steps per year for carbon spinup.
+FORCESOIL_STEP_PER_YEAR = 12
+# default = 12
+
+# Number of years saved for carbon spinup.
+FORCESOIL_NB_YEAR = 1
+# default = 1
+
+#---------------------------------------------------------------------
+# Parametrization :
+#---------------------------------------------------------------------
+
+# Activate STOMATE?
+# set to TRUE if STOMATE is to be activated
+# STOMATE_OK_STOMATE=_AUTO_ : will be set to y if stomate component SBG is activated in config.card
+STOMATE_OK_STOMATE = n
+# default = n
+
+# Activate DGVM?
+# set to TRUE if Dynamic Vegetation DGVM is to be activated
+STOMATE_OK_DGVM = n
+# default = n
+
+# Activate CO2?
+# set to TRUE if photosynthesis is to be activated
+STOMATE_OK_CO2 = y
+# default = n
+
+# Flag to force the value of atmospheric CO2 for vegetation.
+# If this flag is set to true, the ATM_CO2 parameter is used
+#  to prescribe the atmospheric CO2.
+# This Flag is only use in couple mode.
+FORCE_CO2_VEG = FALSE
+# default = FALSE
+
+# Value for atm CO2.
+# If FORCE_CO2_VEG (in not forced mode)
+# Value to prescribe the atm CO2.
+#  For pre-industrial simulations, the value is 286.2 .
+#  348. for 1990 year.
+ATM_CO2 = 350.
+# default = 350.
+
+# constant tree mortality
+# If yes, then a constant mortality is applied to trees. 
+#  Otherwise, mortality is a function of the trees' 
+#  vigour (as in LPJ).
+LPJ_GAP_CONST_MORT = y
+# default = y
+
+# no fire allowed
+# With this variable, you can allow or not
+#  the estimation of CO2 lost by fire
+FIRE_DISABLE = n
+# default = n
+
+# Average method for z0
+# If this flag is set to true (y) then the neutral Cdrag
+#  is averaged instead of the log(z0). This should be
+#  the prefered option. We still wish to keep the other
+#  option so we can come back if needed. If this is
+#  desired then one should set Z0CDRAG_AVE = n
+Z0CDRAG_AVE = y
+# default = y
+
+# parameters describing the surface (vegetation + soil) :
+#---------------------------------------------------------------------
+#
+# Should the vegetation be prescribed
+# This flag allows the user to impose a vegetation distribution
+#  and its characterisitcs. It is espacially interesting for 0D
+#  simulations. On the globe it does not make too much sense as
+#  it imposes the same vegetation everywhere
+IMPOSE_VEG = n
+# default = n
+
+# Flag to use old "interpolation" of vegetation map.
+# IF NOT IMPOSE_VEG and NOT LAND_USE
+#  If you want to recover the old (ie orchidee_1_2 branch) 
+#   "interpolation" of vegetation map.
+SLOWPROC_VEGET_OLD_INTERPOL = n
+# default = n
+
+# Vegetation distribution within the mesh (0-dim mode)
+# If IMPOSE_VEG
+# The fraction of vegetation is read from the restart file. If
+#  it is not found there we will use the values provided here.
+SECHIBA_VEG__01 = 0.2
+SECHIBA_VEG__02 = 0.0
+SECHIBA_VEG__03 = 0.0
+SECHIBA_VEG__04 = 0.0
+SECHIBA_VEG__05 = 0.0
+SECHIBA_VEG__06 = 0.0
+SECHIBA_VEG__07 = 0.0
+SECHIBA_VEG__08 = 0.0
+SECHIBA_VEG__09 = 0.0
+SECHIBA_VEG__10 = 0.8
+SECHIBA_VEG__11 = 0.0
+SECHIBA_VEG__12 = 0.0
+SECHIBA_VEG__13 = 0.0
+# default = 0.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.8, 0.0, 0.0, 0.0
+
+# Maximum vegetation distribution within the mesh (0-dim mode)
+# If IMPOSE_VEG
+# The fraction of vegetation is read from the restart file. If
+#  it is not found there we will use the values provided here.
+SECHIBA_VEGMAX__01 = 0.2
+SECHIBA_VEGMAX__02 = 0.0
+SECHIBA_VEGMAX__03 = 0.0
+SECHIBA_VEGMAX__04 = 0.0
+SECHIBA_VEGMAX__05 = 0.0
+SECHIBA_VEGMAX__06 = 0.0
+SECHIBA_VEGMAX__07 = 0.0
+SECHIBA_VEGMAX__08 = 0.0
+SECHIBA_VEGMAX__09 = 0.0
+SECHIBA_VEGMAX__10 = 0.8
+SECHIBA_VEGMAX__11 = 0.0
+SECHIBA_VEGMAX__12 = 0.0
+SECHIBA_VEGMAX__13 = 0.0
+# default = 0.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.8, 0.0, 0.0, 0.0
+
+# LAI for all vegetation types (0-dim mode)
+# If IMPOSE_VEG
+# The maximum LAI used in the 0dim mode. The values should be found
+#  in the restart file. The new values of LAI will be computed anyway
+#  at the end of the current day. The need for this variable is caused
+#  by the fact that the model may stop during a day and thus we have not
+#  yet been through the routines which compute the new surface conditions.
+SECHIBA_LAI__01 = 0.
+SECHIBA_LAI__02 = 8.
+SECHIBA_LAI__03 = 8.
+SECHIBA_LAI__04 = 4.
+SECHIBA_LAI__05 = 4.5
+SECHIBA_LAI__06 = 4.5
+SECHIBA_LAI__07 = 4.
+SECHIBA_LAI__08 = 4.5
+SECHIBA_LAI__09 = 4.
+SECHIBA_LAI__10 = 2.
+SECHIBA_LAI__11 = 2.
+SECHIBA_LAI__12 = 2.
+SECHIBA_LAI__13 = 2.
+# default = 0., 8., 8., 4., 4.5, 4.5, 4., 4.5, 4., 2., 2., 2., 2.
+
+# Height for all vegetation types (m)
+# If IMPOSE_VEG
+# The height used in the 0dim mode. The values should be found
+#  in the restart file. The new values of height will be computed anyway
+#  at the end of the current day. The need for this variable is caused
+#  by the fact that the model may stop during a day and thus we have not
+#  yet been through the routines which compute the new surface conditions.
+SLOWPROC_HEIGHT__01 = 0.
+SLOWPROC_HEIGHT__02 = 50.
+SLOWPROC_HEIGHT__03 = 50.
+SLOWPROC_HEIGHT__04 = 30.
+SLOWPROC_HEIGHT__05 = 30.
+SLOWPROC_HEIGHT__06 = 30.
+SLOWPROC_HEIGHT__07 = 20.
+SLOWPROC_HEIGHT__08 = 20.
+SLOWPROC_HEIGHT__09 = 20.
+SLOWPROC_HEIGHT__10 = .2
+SLOWPROC_HEIGHT__11 = .2
+SLOWPROC_HEIGHT__12 = .4
+SLOWPROC_HEIGHT__13 = .4
+# default = 0., 30., 30., 20., 20., 20., 15., 15., 15., .5, .6, 1.0, 1.0
+
+
+# Fraction of the 3 soil types (0-dim mode)
+# If IMPOSE_VEG
+# Determines the fraction for the 3 soil types
+#  in the mesh in the following order : sand loam and clay.
+SOIL_FRACTIONS__01 = 0.28
+SOIL_FRACTIONS__02 = 0.52
+SOIL_FRACTIONS__03 = 0.20
+# default = 0.28, 0.52, 0.20
+
+# Fraction of other surface types within the mesh (0-dim mode)
+# If IMPOSE_VEG
+# The fraction of ice, lakes, etc. is read from the restart file. If
+#  it is not found there we will use the values provided here.
+#  For the moment, there is only ice.
+SECHIBA_FRAC_NOBIO = 0.0
+# default = 0.0
+
+# Fraction of the clay fraction (0-dim mode)
+# If IMPOSE_VEG
+# Determines the fraction of clay in the grid box.
+CLAY_FRACTION = 0.2
+# default = 0.2
+
+# Should the surface parameters be prescribed
+# This flag allows the user to impose the surface parameters
+#  (Albedo Roughness and Emissivity). It is espacially interesting for 0D
+#  simulations. On the globe it does not make too much sense as
+#  it imposes the same vegetation everywhere
+IMPOSE_AZE = n
+# default = n
+
+# Emissivity of the surface for LW radiation
+# If IMPOSE_AZE
+# The surface emissivity used for compution the LE emission
+#  of the surface in a 0-dim version. Values range between 
+#  0.97 and 1.. The GCM uses 0.98.
+CONDVEG_EMIS = 1.0
+# default = 1.0
+
+# SW visible albedo for the surface
+# If IMPOSE_AZE
+# Surface albedo in visible wavelengths to be used 
+#  on the point if a 0-dim version of SECHIBA is used. 
+#  Look at the description of the forcing data for 
+#  the correct value.
+CONDVEG_ALBVIS = 0.25
+# default = 0.25
+
+# SW near infrared albedo for the surface
+# If IMPOSE_AZE
+# Surface albedo in near infrared wavelengths to be used 
+#  on the point if a 0-dim version of SECHIBA is used. 
+#  Look at the description of the forcing data for 
+#  the correct value.
+CONDVEG_ALBNIR = 0.25
+# default = 0.25
+
+# Surface roughness (m)
+# If IMPOSE_AZE
+# Surface rougness to be used on the point if a 0-dim version
+#  of SECHIBA is used. Look at the description of the forcing  
+#  data for the correct value.
+CONDVEG_Z0 = 0.15
+# default = 0.15_stnd
+
+# Height to be added to the height of the first level (m)
+# If IMPOSE_AZE
+# ORCHIDEE assumes that the atmospheric level height is counted
+#  from the zero wind level. Thus to take into account the roughness
+#  of tall vegetation we need to correct this by a certain fraction
+#  of the vegetation height. This is called the roughness height in
+#  ORCHIDEE talk.
+ROUGHHEIGHT = 0.0
+# default = 0.0
+
+# The snow albedo used by SECHIBA
+# This option allows the user to impose a snow albedo.
+#  Default behaviour is to use the model of snow albedo
+#  developed by Chalita (1993).
+CONDVEG_SNOWA = default
+# default = use the model of snow albedo developed by Chalita
+
+# Switch bare soil albedo dependent (if TRUE) on soil wetness
+# If TRUE, the model for bare soil albedo is the old formulation.
+#  Then it depend on the soil dry or wetness. If FALSE, it is the 
+#  new computation that is taken, it is only function of soil color.
+ALB_BARE_MODEL = FALSE
+# default = FALSE
+
+# Initial snow mass if not found in restart
+# The initial value of snow mass if its value is not found
+#   in the restart file. This should only be used if the model is 
+#   started without a restart file.
+HYDROL_SNOW = 0.0
+# default = 0.0
+
+
+# Initial snow age if not found in restart
+# The initial value of snow age if its value is not found
+#  in the restart file. This should only be used if the model is 
+#  started without a restart file.
+HYDROL_SNOWAGE = 0.0
+# default = 0.0
+
+# Initial snow amount on ice, lakes, etc. if not found in restart
+# The initial value of snow if its value is not found
+#  in the restart file. This should only be used if the model is 
+#  started without a restart file.
+HYDROL_SNOW_NOBIO = 0.0
+# default = 0.0
+
+# Initial snow age on ice, lakes, etc. if not found in restart
+# The initial value of snow age if its value is not found
+#  in the restart file. This should only be used if the model is 
+#  started without a restart file.
+HYDROL_SNOW_NOBIO_AGE = 0.0
+# default = 0.0
+
+# Initial soil moisture stress if not found in restart
+# The initial value of soil moisture stress if its value is not found
+#  in the restart file. This should only be used if the model is 
+#  started without a restart file.
+HYDROL_HUMR = 1.0
+# default = 1.0
+
+# Total depth of soil reservoir
+HYDROL_SOIL_DEPTH = 2.
+# default = 2.
+
+# Root profile
+# Default values were defined for 2 meters soil depth.
+# For 4 meters soil depth, you may use those ones :
+# 5., .4, .4, 1., .8, .8, 1., 1., .8, 4., 1., 4., 1.
+HYDROL_HUMCSTE= 5.0, 0.8, 0.8, 1.0, 0.8, 0.8, 1.0, 1.0, 0.8, 4.0, 4.0, 4.0, 4.0 
+# default =  5., .8, .8, 1., .8, .8, 1., 1., .8, 4., 4., 4., 4.
+
+# Initial restart deep soil moisture if not found in restart
+# The initial value of deep soil moisture if its value is not found
+#  in the restart file. This should only be used if the model is 
+#  started without a restart file. Default behaviour is a saturated soil.
+HYDROL_BQSB = default
+# default = Maximum quantity of water (Kg/M3) * Total depth of soil reservoir = 150. * 2
+
+# Initial upper soil moisture if not found in restart
+# The initial value of upper soil moisture if its value is not found
+#  in the restart file. This should only be used if the model is 
+#  started without a restart file.
+HYDROL_GQSB = 0.0
+# default = 0.0
+
+# Initial upper reservoir depth if not found in restart
+# The initial value of upper reservoir depth if its value is not found
+#  in the restart file. This should only be used if the model is 
+#  started without a restart file.
+HYDROL_DSG = 0.0
+# default = 0.0
+
+# Initial dry soil above upper reservoir if not found in restart
+# The initial value of dry soil above upper reservoir if its value 
+#  in the restart file. This should only be used if the model is 
+#  started without a restart file. The default behaviour
+#  is to compute it from the variables above. Should be OK most of 
+#  the time.
+HYDROL_DSP = default
+# default = Total depth of soil reservoir - HYDROL_BQSB / Maximum quantity of water (Kg/M3) = 0.0
+
+# Initial water on canopy if not found in restart
+# The initial value of moisture on canopy if its value 
+#  in the restart file. This should only be used if the model is 
+#  started without a restart file.
+HYDROL_QSV = 0.0
+# default = 0.0
+
+# Soil moisture on each soil tile and levels
+# The initial value of mc if its value is not found
+#  in the restart file. This should only be used if the model is 
+#  started without a restart file.
+HYDROL_MOISTURE_CONTENT = 0.3
+# default = 0.3
+
+# US_NVM_NSTM_NSLM
+# The initial value of us (relative moisture) if its value is not found
+#  in the restart file. This should only be used if the model is 
+#  started without a restart file.
+US_INIT = 0.0
+# default = 0.0
+
+# Coefficient for free drainage at bottom
+# The initial value of free drainage if its value is not found
+#  in the restart file. This should only be used if the model is 
+#  started without a restart file.
+FREE_DRAIN_COEF = 1.0, 1.0, 1.0
+# default = 1.0, 1.0, 1.0
+
+# Bare soil evap on each soil if not found in restart
+# The initial value of bare soils evap if its value is not found
+#  in the restart file. This should only be used if the model is 
+#  started without a restart file.
+EVAPNU_SOIL = 0.0
+# default = 0.0
+
+# Initial temperature if not found in restart
+# The initial value of surface temperature if its value is not found
+#  in the restart file. This should only be used if the model is 
+#  started without a restart file.
+ENERBIL_TSURF = 280.
+# default = 280.
+
+# Initial Soil Potential Evaporation
+# The initial value of soil potential evaporation if its value 
+#  is not found in the restart file. This should only be used if
+#  the model is started without a restart file. 
+ENERBIL_EVAPOT = 0.0
+# default = 0.0
+
+# Initial soil temperature profile if not found in restart
+# The initial value of the temperature profile in the soil if 
+#   its value is not found in the restart file. This should only 
+#   be used if the model is started without a restart file. Here
+#   we only require one value as we will assume a constant 
+#   throughout the column.
+THERMOSOIL_TPRO = 280.
+# default = 280.
+
+# Initial leaf CO2 level if not found in restart
+# The initial value of leaf_ci if its value is not found
+#  in the restart file. This should only be used if the model is
+#  started without a restart file.
+DIFFUCO_LEAFCI = 233.
+# default = 233.
+
+
+# Keep cdrag coefficient from gcm.
+# Set to .TRUE. if you want q_cdrag coming from GCM.
+#  Keep cdrag coefficient from gcm for latent and sensible heat fluxes.
+#  TRUE if q_cdrag on initialization is non zero (FALSE for off-line runs).
+CDRAG_FROM_GCM = y
+# default =  IF q_cdrag == 0 ldq_cdrag_from_gcm = .FALSE. ELSE .TRUE.
+
+
+# Artificial parameter to increase or decrease canopy resistance
+# Add from Nathalie - the 28 of March 2006 - advice from Fred Hourdin
+# By PFT.
+RVEG_PFT = 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.
+# default = 1.
+
+
+# Interception reservoir coefficient.
+# Transforms leaf area index into size of interception reservoir
+#  for slowproc_derivvar or stomate.
+SECHIBA_QSINT = 0.02
+# default = 0.1
+
+#**************************************************************************
+# LAND_USE
+#**************************************************************************
+
+# Read a land_use vegetation map
+# pft values are needed, max time axis is 293
+LAND_USE = y
+# default = n
+
+# Year of the land_use vegetation map readed
+# year off the pft map
+# If LAND_USE (11 = 1860 - 1850 +1 for PFTmap.20C3M.nc, 1 for PFTmap_IPCC_2000.nc) 
+VEGET_YEAR = 1
+# default = 282
+
+# booleen to indicate that a new LAND USE file will be used (since 1.9.5 version).
+# The parameter is used to bypass veget_year count 
+# and reinitialize it with VEGET_YEAR parameter.
+# Then it is possible to change LAND USE file.
+# If LAND_USE
+VEGET_REINIT = n
+# default = n
+
+# Update vegetation frequency (since 2.0 version)
+# The veget datas will be update each this time step.
+# If LAND_USE
+VEGET_UPDATE= 0Y
+# default = 1Y
+
+# treat land use modifications
+# With this variable, you can use a Land Use map
+# to simulate anthropic modifications such as   
+# deforestation.                                
+# If LAND_USE
+LAND_COVER_CHANGE= y
+# default = y
+
+#**************************************************************************
+
+# agriculture allowed?
+# With this variable, you can determine
+#  whether agriculture is allowed
+AGRICULTURE = y
+# default = y
+
+# Harvert model for agricol PFTs.
+# Compute harvest above ground biomass for agriculture.
+# Change daily turnover.
+HARVEST_AGRI = y
+# default = y
+
+# herbivores allowed?
+# With this variable, you can activate herbivores 
+HERBIVORES = n
+# default = n
+
+# treat expansion of PFTs across a grid cell?
+# With this variable, you can determine
+#  whether we treat expansion of PFTs across a
+#  grid cell.
+TREAT_EXPANSION = n
+# default = n
+
+#**************************************************************************
+
+# Time within the day simulated
+# This is the time spent simulating the current day. This variable is
+#  prognostic as it will trigger all the computations which are
+#  only done once a day.
+SECHIBA_DAY = 0.0
+# default = 0.0
+
+# Time step of STOMATE and other slow processes
+# Time step (s) of regular update of vegetation
+#  cover, LAI etc. This is also the time step
+#  of STOMATE.
+DT_SLOW = 86400.
+# default = un_jour = 86400.
+
+#**************************************************************************
+
+# Allows to switch on the multilayer hydrology of CWRR
+# This flag allows the user to decide if the vertical
+#  hydrology should be treated using the multi-layer 
+#  diffusion scheme adapted from CWRR by Patricia de Rosnay.
+#  by default the Choisnel hydrology is used.
+HYDROL_CWRR = n
+# default = n
+
+# do horizontal diffusion?
+# If TRUE, then water can diffuse horizontally between
+#  the PFTs' water reservoirs.
+HYDROL_OK_HDIFF = n
+# default = n
+ 
+
+# time scale (s) for horizontal diffusion of water
+# If HYDROL_OK_HDIFF
+# Defines how fast diffusion occurs horizontally between
+#  the individual PFTs' water reservoirs. If infinite, no
+#  diffusion.
+HYDROL_TAU_HDIFF = 1800.
+# default = 86400.
+
+# Percent by PFT of precip that is not intercepted by the canopy (since TAG 1.8).
+# During one rainfall event, PERCENT_THROUGHFALL_PFT% of the incident rainfall
+#  will get directly to the ground without being intercepted, for each PFT..
+PERCENT_THROUGHFALL_PFT = 30., 30., 30., 30., 30., 30., 30., 30., 30., 30., 30., 30., 30.
+# default = 30., 30., 30., 30., 30., 30., 30., 30., 30., 30., 30., 30., 30.
+
+# Decides if we route the water or not
+# This flag allows the user to decide if the runoff
+#  and drainage should be routed to the ocean
+#  and to downstream grid boxes.
+RIVER_ROUTING = n
+# default = n
+
+# Name of file which contains the routing information
+# The file provided here should allow the routing module to
+#  read the high resolution grid of basins and the flow direction 
+#  from one mesh to the other.
+ROUTING_FILE = routing.nc
+# default = routing.nc
+
+# Time step of the routing scheme
+# If RIVER_ROUTING
+# This values gives the time step in seconds of the routing scheme. 
+#   It should be multiple of the main time step of ORCHIDEE. One day
+#   is a good value.
+ROUTING_TIMESTEP = 86400
+# default = 86400
+
+# Number of rivers 
+# If RIVER_ROUTING
+# This parameter chooses the number of largest river basins
+#  which should be treated as independently as rivers and not
+#  flow into the oceans as diffusion coastal flow.
+ROUTING_RIVERS = 50
+# default = 50
+
+# Should we compute an irrigation flux 
+# This parameters allows the user to ask the model
+#  to compute an irigation flux. This performed for the
+#  on very simple hypothesis. The idea is to have a good
+#  map of irrigated areas and a simple function which estimates
+#  the need to irrigate.
+DO_IRRIGATION = n
+# default = n
+
+# Name of file which contains the map of irrigated areas
+# If IRRIGATE
+# The name of the file to be opened to read the field
+#  with the area in m^2 of the area irrigated within each
+#  0.5 0.5 deg grid box. The map currently used is the one
+#  developed by the Center for Environmental Systems Research 
+#  in Kassel (1995).
+IRRIGATION_FILE = irrigated.nc
+# default = irrigated.nc
+
+# Should we include floodplains 
+# This parameters allows the user to ask the model
+#  to take into account the flood plains and return 
+#  the water into the soil moisture. It then can go 
+#  back to the atmopshere. This tried to simulate 
+#  internal deltas of rivers.
+DO_FLOODPLAINS = n
+# default = n
+
+#**************************************************************************

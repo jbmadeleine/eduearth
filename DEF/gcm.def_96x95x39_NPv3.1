@@ -1,0 +1,64 @@
+## $Header: /home/ioipsl/CVSROOT/IPSLCM4_v1/EXP00/gcm.def,v 1.3 2004/03/30 13:12:23 adm Exp $
+ok_guide=n
+ok_strato=y
+##  Activation ou non de la parametrisation de Hines pour la strato
+ok_hines=y
+#  Couche eponge dans les couches de pression plus faible que 100 fois la pression de la derniere couche
+iflag_top_bound=2
+#  Coefficient pour la couche eponge (valeur derniere couche)
+tau_top_bound=5.e-5
+## nombre de pas par jour (multiple de iperiod) ( ici pour  dt = 1 min )      
+day_step=480
+## periode pour le pas Matsuno (en pas)
+iperiod=5
+## periode de la dissipation (en pas)
+idissip=5
+## choix de l'operateur de dissipation (star ou  non star )
+lstardis=y
+## nombre d'iterations de l'operateur de dissipation   gradiv
+nitergdiv=1
+## nombre d'iterations de l'operateur de dissipation  nxgradrot
+nitergrot=2
+## nombre d'iterations de l'operateur de dissipation  divgrad            
+niterh=2
+## temps de dissipation des plus petites long.d ondes pour u,v (gradiv)  
+tetagdiv=5400.
+#tetagdiv=2400.
+## temps de dissipation des plus petites long.d ondes pour u,v(nxgradrot)
+#tetagrot=7200.
+tetagrot=5400.
+#tetagrot=2400.
+## temps de dissipation des plus petites long.d ondes pour  h ( divgrad) 
+#tetatemp=7200.
+tetatemp=5400.
+#tetatemp=2400.
+## coefficient pour gamdissip                                            
+coefdis=0.
+## choix du shema d'integration temporelle (Matsuno ou Matsuno-leapfrog) 
+purmats=n
+## avec ou sans physique                                                 
+iflag_phys=1
+## periode de la physique (en pas)                                       
+iphysiq=5
+## longitude en degres du centre du zoom                                 
+clon=0.
+## latitude en degres du centre du zoom                                  
+clat=0.
+## facteur de grossissement du zoom,selon longitude                      
+grossismx=1.0
+## facteur de grossissement du zoom ,selon latitude                      
+grossismy=1.0
+##  Fonction  f(y)  hyperbolique  si = .true.  , sinon  sinusoidale         
+fxyhypb=y
+## extension en longitude  de la zone du zoom  ( fraction de la zone totale)
+dzoomx=0.0
+## extension en latitude de la zone  du zoom  ( fraction de la zone totale)
+dzoomy=0.0
+##raideur du zoom en  X
+taux=3.
+##raideur du zoom en  Y
+tauy=3.
+##  Fonction  f(y) avec y = Sin(latit.) si = .true. , sinon y = latit.         
+ysinus=y
+
+nsplit_phys=2

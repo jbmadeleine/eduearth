@@ -1,0 +1,6 @@
+##  Avec ou sans strato
+ok_strato=y 
+#  Couche eponge dans les couches de pression plus faible que 100 fois la pression de la derniere couche
+iflag_top_bound=2
+#  Coefficient pour la couche eponge (valeur derniere couche)
+tau_top_bound=5.e-5

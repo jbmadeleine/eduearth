@@ -1,0 +1,10 @@
+ok_guide=y
+guide_u= y
+guide_v= y
+guide_T= n
+guide_P= n
+guide_Q= n
+tau_min_u=0.0208333
+tau_max_u=0.125
+tau_min_v=0.0208333
+tau_max_v=0.125

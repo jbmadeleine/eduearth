@@ -1,0 +1,60 @@
+Directory that contains *.def files for 3D simulations.
+
+run.def		: main default files for LMDZ driver
+LX.def		: vertical grid where X is the number of levels
+gcm*def		: parameters for the 3D dynamical core
+orchidee.def	: for continental surfaces
+config.def	: configuration setup (model, forcing, outputs ...)
+traceur.def	: control of advected trace species
+guide.def	: control of nudging
+physiq.def	: corresponds to PHYS/physiq.def_NPv6.0.12split
+
+PHYS directory
+--------------
+The "PHYS" directory contains various default files for various configurations
+of the physical package :
+AR4			: 2005-2013 - used for CMIP3 (IPSL-CM4 [1]) and CMIP5 (IPSL-CM5A, [2])
+NPv0.0			: first "new physics" version ~ 2005
+NPv1.0
+NPv2.0
+NPv3.0
+NPv3.1			: 2012 - "new physics" used for CMIP5 (IPSL-CM5B, [3])
+NPv3.2			: 2014 - more stable numerical schemes in the boundary layer
+NPv4.12			: 2014 - first version for CMIP6 = new physics + stoch. trig. + stratocu
+NPv5.17h		: Jul 2015 - first long coupled simulations
+NPv5.4			: Fev 2016 - new convective mixing (iflag_mix=1) -> ranifall variability
+NPv5.5			: Apr 2016 - RRTM + Bergeron + increased turb. mix. length -> reduced call biases
+NPv5.65			: Jun 2016 : (=6.0.4) tuning
+NPv5.67			:            alternative tuning
+NPv5.70			: Jul 2016 : (=6.0.5) vert. cloud PDF, tuning
+NPv5.80b		:
+NPv5.80bz0		:
+NPv6.0.7		: Sep 2016
+NPv6.0.8		:
+NPv6.0.9		: Jan 2017 : tuning sub-grid orog. + physical timestep = 15 min (10 before)
+NPv6.0.10		: Apr 2017 : convection conditioned by Ttop
+NPv6.0.10fallv		: new boundary layer tuning (Vignon)
+NPv6.0.12		: Jul 2017 tune of the final tuning for CMIP6
+NPv6.0.12split		: Jul 2017 - IPSL-CM6 - thermals outside cold pools only (splitting)
+NPv6.0.12ttop		: Jul 2017 - IPSL-CM6 - convection conditioned by ttop, close to NPv6.0.12
+NPv6.0.11trigB		: Jul 2017 - alterantive tuning with different threshold on cumulus size for trig.
+
+
+[1] F. Hourdin, I. Musat, S. Bony, P. Braconnot, F. Codron, J.-L. 
+Dufresne, L. Fairhead, M.-A. Filiberti, P. Friedlingstein, J.-Y. 
+Grandpeix, G. Krinner, P. LeVan, Z.-X. Li et F. Lott, 2006, The LMDZ4 
+general circulatiuon model : climate performance and sensitivity to 
+parametrized physics with emphasis on tropical convection,
+Climate Dynamics, 27 : 787-813
+
+[2] Hourdin, F., M.-A. Foujols, F. Codron, V. Guemas, J.-L. Dufresne, S. 
+Bony, S. Denvil, L. Guez, F. Lott, J. Ghattas, P. Braconnot, O. Marti, Y. 
+Meurdesoif, and L. Bopp, 2013a, Impact of the LMDZ atmospheric grid 
+configuration on the climate and sensitivity of the IPSL-CM5A coupled 
+model, Clim. Dyn., 40, 2167–2192, 2013a.
+
+[3] Hourdin, F., J.-Y. Grandpeix, C. Rio, S. Bony, A. Jam, F. Cheruy, N. 
+Rochetin, L. Fairhead, A. Idelkadi, I. Musat, J.-L. Dufresne, A. Lahellec, 
+M.-P. Lefebvre, and R. Roehrig, 2013b, LMDZ5B: the atmospheric component 
+of the IPSL climate model with revisited parameterizations for clouds and 
+convection, Clim. Dyn., 40, 2193–2222, 2013b.

@@ -1,0 +1,14 @@
+vert_sampling=strato_custom
+vert_scale=7.
+vert_dzmin=0.017
+vert_dzlow=0.79
+vert_z0low=8.
+vert_dzmid=2.5
+vert_z0mid=20.
+vert_h_mid=10.
+vert_dzhig=8
+vert_z0hig=40
+vert_h_hig=15.
+day_step=144
+iphysiq=1
+ok_strato=n
