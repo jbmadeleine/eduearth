@@ -1,0 +1,13 @@
+NOTES DE DEVELOPPEMENT EDUEARTH
+
+----------- timestamp: 18W11D1
+(lundi 12 mars 2018 09:48)
+ 
+Upload sur GitHub de la première vague de développement EduEarth
+
+-------------------------------------------------------------------
+LISTE DES AMELIORATIONS RESTANTES
+-------------------------------------------------------------------
+
+- permettre le changement de date (il faut recompiler ce0l avec le bon run.def? voir la 
+meilleure méthode)
