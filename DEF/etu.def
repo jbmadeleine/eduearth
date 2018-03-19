@@ -1,7 +1,107 @@
-## Fichier de configuration pour eduearth
-## Nombre de jours d'integration
+# -----------------------------------------------------------------
+# Fichier de configuration pour eduearth
+# -----------------------------------------------------------------
+# Jour de l'etat initial
+# (annee de 360jours; donc 21 juin = 5*30+21=171, par exemple
+dayref=171
+# Nombre de jours d'integration
 nday=5
-## Diagnostiques dynamiques
+
+# -----------------------------------------------------------------
+# Taux gaz a effet de serre
+#concentration des gaz (co2 ch4   n2o  cfc11 cfc12)
+#                  (D: 348. 1650. 306.  280.  484.)
+co2_ppm=0.36886500E+03
+CH4_ppb=0.17510225E+04
+
+# -----------------------------------------------------------------
+# Parametres du zoom
+# longitude en degres du centre du zoom                                  
+clon=0.
+# latitude en degres du centre du zoom                                  
+clat=45.
+# facteur de grossissement du zoom,selon longitude                      
+grossismx=3.0
+# facteur de grossissement du zoom ,selon latitude                      
+grossismy=3.0
+# extension en longitude  de la zone du zoom  ( fraction de la zone totale)
+dzoomx=0.15
+# extension en latitude de la zone  du zoom  ( fraction de la zone totale)
+dzoomy=0.15
+#raideur du zoom en  X
+taux=3.
+#raideur du zoom en  Y
+tauy=3.
+
+# -----------------------------------------------------------------
+# Fichiers de sorties: configuration
+phys_out_filekeys=       y       y       y       n       n
+phys_out_filenames=      histmth histday histhf  histins histLES
+phys_out_filelevels=     10      5       4       4       4
+phys_out_filetypes=      ave(X)  ave(X)  ave(X)  inst(X) inst(X)
+phys_out_filetimesteps=  5day    1day    1hr     6hr     6hr
+
+# Changer le niveau de sortie de variables specifiques 
+flag_SWdnTOA__00003 = 4
+flag_SWdnSFC__00003 = 4
+flag_wind10m__00003 = 4
+flag_u10m__00003 = 4
+flag_v10m__00003 = 4
+
+# -----------------------------------------------------------------
+# Parametres orbitaux pour simulations paleoclimatiques
+#excentricite
+R_ecc=0.016715
+#equinoxe
+R_peri=102.7
+#obliquite
+R_incl=23.441
+#constante solaire
+solaire=1366.0896
+
+# -----------------------------------------------------------------
+# Parametres nuages
+
+#seuils de la precipitation des nuages strateformes (D: 2.6e-4 2.6e-4)
+cld_lc_lsc=0.000205
+cld_lc_con=0.000205
+
+#constante de temps pour eleminer eau lsc et convective
+# (D: 3600. 3600.)
+cld_tau_lsc=900
+cld_tau_con=900
+
+#facteurs correctifs sur la vitesse de chute des cristaux de glace (D: 1 1)
+ffallv_lsc=0.6
+ffallv_con=0.6
+
+# coefficient sur la reevaporation de la pluie (D: 2.e-5 n)
+# regle a 3.e-5 sur des cas de cumulus en 1D
+coef_eva=0.0001
+
+# Modification de la plage de temperature pour la phase mixte
+# liquide/glace des nuages
+# Controle par les t_glace_min/max, exposant_glace,
+# iflag_t_glace (D=0)
+t_glace_min=243.15
+t_glace_max=273.15
+exposant_glace=0.5
+iflag_t_glace=3
+
+#rayon effectif pour les nuages de glace (D:35)
+rad_froid=35
+
+#rayons effectifs pour les nuages eau liq (tailles des gouttes
+# d eau nuageuse, D: 13 9)
+rad_chau1=12
+rad_chau2=11
+
+#Rayons min et max effectifs des particules des nuages
+rei_min=16
+rei_max=61.29
+
+# -----------------------------------------------------------------
+# Diagnostiques dynamiques
 ok_dynzon=y
-## Periode de stockage des diagnostiques dynamiques (en jours)
+# Periode de stockage des diagnostiques dynamiques (en jours)
 periodav= 5.

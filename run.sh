@@ -160,9 +160,9 @@ fi
 
 ln -s ../gcm.e ../*.sh .
 cp ../DEF/*def .
+cp ../INIT/grille.pdf .
 sed -e 's/VEGET=.*.$/VEGET='$VEGET'/' ../DEF/config.def >| config.def
 sed -e 's/L39.def/L'$nz'.def/' ../DEF/run.def >| run.def 
-echo "INCLUDEDEF=etu.def" >> run.def
 ln -s ../INIT/limit.nc .
 
 echo "Running the simulation"
