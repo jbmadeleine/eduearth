@@ -16,6 +16,23 @@ version=20171119.trunk
 nz=39
 ####################################################################
 
+nz=39
+comp=0
+while getopts "z:-:" options; do
+  case $options in
+   z) nz=${OPTARG};;
+   -) case $OPTARG in
+        # --comp (recompile LMDz)
+        comp) comp=1;;
+        *) echo "Unknown option $OPTARG"
+           exit;;
+      esac;;
+   *) echo "Unknown option"
+      exit;;
+  esac
+done
+
+
 curdir=$PWD
 SIMU=$curdir/LMDZ$version/modipsl/modeles/LMDZ/INIT
 mkdir -p $SIMU
@@ -47,6 +64,19 @@ function myget { #1st and only argument should be file name
   fi
 }
 
+if [ $comp = 1 ] ; then
+  echo '###############################################################'
+  echo '     Recompiling LMDz'
+  echo '###############################################################'
+  cd ../
+  for mod in gcm ce0l ; do
+     ./compile.sh $mod
+     if [ ! -f $mod.e ] ; then
+        echo Echec pour la compilation de lmdz ; exit
+     fi
+  done
+  cd $SIMU
+fi
 
 echo
 echo '###############################################################'
@@ -55,7 +85,7 @@ echo '###############################################################'
 echo '  in files start.nc, startphy.nc, limit.nc             '
 echo 
 echo '...............................................................'
-echo '  2.1  Geting input files from the web                         '
+echo '  Getting input files from the web                         '
 echo '...............................................................'
 ln -s ../*.e ../*.sh .
 cp ../DEF/*def .
