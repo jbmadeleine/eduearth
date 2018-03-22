@@ -3,7 +3,15 @@
 # -----------------------------------------------------------------
 # Jour de l'etat initial
 # (annee de 360jours; donc 21 juin = 5*30+21=171, par exemple
-dayref=171
+# --------- Ls = 0 deg
+#dayref=80
+# --------- Ls = 90 deg
+dayref=172
+# --------- Ls = 180 deg
+#dayref=264
+# --------- Ls = 270 deg
+#dayref=353
+
 # Nombre de jours d'integration
 nday=5
 
