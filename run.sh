@@ -203,7 +203,9 @@ cd $curdir
 mkdir expnum_$zedate
 for file in compile.sh gcm.e limit.nc start.nc startphy.nc ; do
   cp -Lr $SIMU/../expnum_$zedate/$file expnum_$zedate/.
+  rm $SIMU/../expnum_$zedate/$file
 done
 mv -n $SIMU/../expnum_$zedate/* expnum_$zedate/.
+rmdir $SIMU/../expnum_$zedate
 
 echo "Simulation's results can be found in expnum_"$zedate
