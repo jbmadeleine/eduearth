@@ -15,11 +15,6 @@ parser = OptionParser()
 if len(args) == 0: args = "resultat.nc"
 fi=args
 
-##################################################
-lev = 1e5
-vmin = 0. ; vmax = 1500.
-##################################################
-
 # Coordonnees du point
 #------------------------------------------------------------------
 xloc = 0.
@@ -37,9 +32,11 @@ fig = plt.figure()
 ax = fig.gca()
 ax.set_xlabel("Temps")
 ax.set_ylabel("Eclairement (W/m2)")
-
-plt.grid()
 plt.plot(t,fluxinc,'b')
 plt.plot(t,fluxsurf,'b--')
+plt.legend(('Au sommet 'r"$\bar{I}_{TOA}$",
+  'Direct en surface 'r"$\bar{I}_{direct}$"),
+  loc=(0.53, 0.7))
+plt.grid()
 plt.show()
 #------------------------------------------------------------------
