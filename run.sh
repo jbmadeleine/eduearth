@@ -179,7 +179,7 @@ if [ $veget != 0 ] ; then
 else
 
    cd expnum_$zedate
-   ln -s ../INIT/start.nc ../INIT/startphy.nc .
+   cp ../INIT/start.nc ../INIT/startphy.nc .
 
 fi
 
@@ -188,12 +188,12 @@ fi
 # Preparing a Directory for a first simulation :
 ####################################################################
 
-ln -s ../gcm.e ../*.sh .
+cp ../gcm.e ../*.sh .
 cp ../DEF/*def .
 cp ../INIT/grille.pdf .
 sed -e 's/VEGET=.*.$/VEGET='$VEGET'/' ../DEF/config.def >| config.def
 sed -e 's/L39.def/L'$nz'.def/' ../DEF/run.def >| run.def 
-ln -s ../INIT/limit.nc .
+cp ../INIT/limit.nc .
 
 echo "Running the simulation"
 $rungcm | tee listing0 | grep "Date = "
@@ -201,10 +201,6 @@ $rungcm | tee listing0 | grep "Date = "
 echo "Moving the simulation to main directory"
 cd $curdir
 mkdir expnum_$zedate
-for file in compile.sh gcm.e limit.nc start.nc startphy.nc ; do
-  cp -Lr $SIMU/../expnum_$zedate/$file expnum_$zedate/.
-  rm $SIMU/../expnum_$zedate/$file
-done
 mv -n $SIMU/../expnum_$zedate/* expnum_$zedate/.
 rmdir $SIMU/../expnum_$zedate
 
