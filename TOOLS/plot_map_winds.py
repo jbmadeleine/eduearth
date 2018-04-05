@@ -38,8 +38,6 @@ p.vx = u10m
 p.vy = v10m
 p.svx = 1
 p.svy = 1
-p.sx = 1
-p.sy = 1
 p.title = 'Wind velocity and sea level pressure'
 p.units = 'm/s and hPa'
 # For colors, see https://matplotlib.org/1.4.3/users/colormaps.html
