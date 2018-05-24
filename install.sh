@@ -30,7 +30,7 @@ done
 # standards : 96x95x39, 144x142x79
 
 grid_resolution=$nx"x"$ny"x"$nz
-version=20171119.trunk
+version=20180516.trunk
 ####################################################################
 # CAREFUL: make sure that the parameters below are the same in
 #   install.sh and run.sh
