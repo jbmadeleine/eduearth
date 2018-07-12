@@ -18,20 +18,28 @@ nz=39
 
 nz=39
 comp=0
-while getopts "z:-:" options; do
-  case $options in
-   z) nz=${OPTARG};;
-   -) case $OPTARG in
-        # --comp (recompile LMDz)
-        comp) comp=1;;
-        *) echo "Unknown option $OPTARG"
-           exit;;
-      esac;;
-   *) echo "Unknown option"
-      exit;;
-  esac
-done
+expname="expnum"
 
+while (($# > 0))
+   do
+   case $1 in
+     "-h") cat <<........fin
+    $0 [ -v version ] [ -comp ] -z NB_VERT_LEVELS ] [ -name EXP_NAME ]
+
+    -v       "version" like 20150828.trunk
+             see http://www.lmd.jussieu.fr/~lmdz/Distrib/LISMOI.trunk
+    -comp    recompile the model, only taking into account changes
+    -z       number of vertical levels (39 default)
+    -name    name of the experiment (used for directory name)
+........fin
+     exit ;;
+     "-v") version=$2 ; shift ; shift ;;
+     "-comp") comp=1 ; shift ;;
+     "-z") nz=$2 ; shift ; shift ;;
+     "-name") expname=$2 ; shift ; shift ;;
+     *) ./install_lmdz.sh -h ; exit
+   esac
+done
 
 curdir=$PWD
 SIMU=$curdir/LMDZ$version/modipsl/modeles/LMDZ/INIT
@@ -138,7 +146,9 @@ ps2epsi tmp.ps ; epstopdf tmp.ps ; \mv tmp.pdf grille.pdf >>  out.ferret 2>&1
 
 cd ../
 zedate=`date --rfc-3339=seconds | sed s+' '+'_'+g | sed s+':'+'-'+g | awk -F '+' '{print $1}'`
-mkdir expnum_$zedate
+
+simudir=$expname"_"$zedate
+mkdir $simudir
 
 if [ $veget != 0 ] ; then
 
@@ -171,14 +181,14 @@ if [ $veget != 0 ] ; then
    echo   $rungcm' > listing0                           '
    echo 'Then,'
 
-   cd ../expnum_$zedate
+   cd ../$simudir
    ln -s ../expnum0/restart.nc start.nc
    ln -s ../expnum0/restartphy.nc startphy.nc
    ln -s ../expnum0/sechiba_rest_out.nc sechiba_rest_in.nc
 
 else
 
-   cd expnum_$zedate
+   cd $simudir
    cp ../INIT/start.nc ../INIT/startphy.nc .
 
 fi
@@ -200,8 +210,8 @@ $rungcm | tee listing0 | grep "Date = "
 
 echo "Moving the simulation to main directory"
 cd $curdir
-mkdir expnum_$zedate
-mv -n $SIMU/../expnum_$zedate/* expnum_$zedate/.
-rmdir $SIMU/../expnum_$zedate
+mkdir $simudir
+mv -n $SIMU/../$simudir/* $simudir/.
+rmdir $SIMU/../$simudir
 
-echo "Simulation's results can be found in expnum_"$zedate
+echo "Simulation's results can be found in "$simudir
