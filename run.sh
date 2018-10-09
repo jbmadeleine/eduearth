@@ -37,7 +37,7 @@ while (($# > 0))
      "-comp") comp=1 ; shift ;;
      "-z") nz=$2 ; shift ; shift ;;
      "-name") expname=$2 ; shift ; shift ;;
-     *) ./install_lmdz.sh -h ; exit
+     *) ./run.sh -h ; exit
    esac
 done
 
