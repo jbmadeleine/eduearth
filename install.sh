@@ -156,6 +156,11 @@ if [[ $lmdzonly == 0 ]]; then
   cd $curdir/TOOLS
   rm -rf planetoplot
   git clone https://github.com/aymeric-spiga/planetoplot
+  cd planetoplot/settings
+  mv set_var.txt set_var_planet.txt
+  ln -s set_var_earth.txt set_var.txt
+  \ls -l set_var.txt
+  cd $curdir/TOOLS
   rm -rf planets
   git clone https://github.com/aymeric-spiga/planets
   
