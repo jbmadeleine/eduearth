@@ -52,9 +52,12 @@ phys_out_filetimesteps=  5day    1day    1hr     6hr     6hr
 # Changer le niveau de sortie de variables specifiques 
 flag_SWdnTOA__00003 = 4
 flag_SWdnSFC__00003 = 4
+flag_SWdnSFCclr__00003 = 4
 flag_wind10m__00003 = 4
 flag_u10m__00003 = 4
 flag_v10m__00003 = 4
+flag_zfull = 4 4 4
+flag_sza = 4 4 4
 
 # -----------------------------------------------------------------
 # Parametres orbitaux pour simulations paleoclimatiques
