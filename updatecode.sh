@@ -13,10 +13,10 @@ git pull
 #svn update -r 1370
 #cd ..
 #
-#echo "*** update planetoplot"
-#cd TOOLS/planetoplot
-#git pull
-#cd ../..
+echo "*** update planetoplot"
+cd TOOLS/planetoplot
+git pull
+cd ../..
 #
 #echo "*** update planets"
 #cd TOOLS/planets
