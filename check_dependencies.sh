@@ -16,7 +16,7 @@ fi
 
 echo ""
 echo "Checking for utilities:"
-for logiciel in svn wget tar gzip make gfortran gcc ; do
+for logiciel in csh svn wget tar gzip make gfortran gcc ; do
 which $logiciel
 if [ "`which $logiciel`" = "" ] ; then
 echo "You must install $logiciel on your system"
@@ -33,4 +33,8 @@ echo "You should install $logiciel on your system"
 fi
 done
 
-
+echo ""
+echo "For eduplanet/eduearth, you also need Python 2.7 and the following modules:"
+echo "from mpl_toolkits.basemap import Basemap"
+echo "import netCDF4"
+echo "(you can use these commands inside Python to check if they are installed)"
